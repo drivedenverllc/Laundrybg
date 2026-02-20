@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Keep Document</title>
+</head>
+<body>
+    <h1>Booking Form</h1>
+
+    <form id="bookingForm">
+        <label for="pickupDate">Pickup Date:</label>
+        <input type="date" id="pickupDate" name="pickupDate" required>
+        <script>
+            // Prevent booking dates in the past
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('pickupDate').setAttribute('min', today);
+        </script>
+        <br><br>
+
+        <label for="paymentType">Payment Type:</label>
+        <select id="paymentType" name="paymentType" required>
+            <option value="">Select payment type</option>
+            <option value="creditCard">Credit Card</option>
+            <option value="paypal">PayPal</option>
+        </select>
+        <br><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" value="Denver Metro Area" readonly>
+        <br><br>
+
+        <label for="bags">Number of Bags:</label>
+        <input type="number" id="bags" name="bags" min="2" value="2" required>
+        <br><br>
+
+        <label for="rushFee">Rush Fee:</label>
+        <input type="checkbox" id="rushFee" name="rushFee">
+        <script>
+            // Disable rush fee after 2pm
+            const rushCheckbox = document.getElementById('rushFee');
+            const now = new Date();
+            if (now.getHours() >= 14) {
+                rushCheckbox.disabled = true;
+                rushCheckbox.checked = false;
+            }
+        </script>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <div id="thankYouMessage" style="display:none;">Thank you for your submission!</div>
+
+    <script>
+        // Display thank you message after form submission
+        document.getElementById('bookingForm').onsubmit = function (event) {
+            event.preventDefault(); // Prevent actual submission for demonstration
+            document.getElementById('thankYouMessage').style.display = 'block';
+        };
+    </script>
+</body>
+</html>
