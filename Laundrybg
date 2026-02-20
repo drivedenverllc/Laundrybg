@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Laundry Be Gone offers affordable wash & fold pickup and delivery in Green Valley, Aurora, Commerce City, and Brighton Colorado. 24-hour turnaround.">
+<title>Laundry Be Gone</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #444;
+    scroll-behavior: smooth;
+}
+
+header {
+    background: linear-gradient(135deg, #81d4fa, #4fc3f7);
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+header p {
+    font-size: 18px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: white;
+    color: #0288d1;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background-color: #e1f5fe;
+}
+
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.services, .contact {
+    background-color: #f0f9ff;
+}
+
+.card {
+    background: white;
+    margin: 20px auto;
+    padding: 25px;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+input[type="number"] {
+    width: 80px;
+    padding: 8px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0277bd;
+}
+
+footer {
+    background-color: #0288d1;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+a {
+    color: #0288d1;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Laundry Be Gone</h1>
+    <p>Fresh. Clean. Delivered. 24-Hour Turnaround.</p>
+    <a href="#booking" class="button">Schedule & Pay</a>
+</header>
+
+<section>
+    <h2>Our Services</h2>
+
+    <div class="card">
+        <h3>Wash & Fold</h3>
+        <p>$10 per 13-gallon sized bag.</p>
+    </div>
+
+    <div class="card">
+        <h3>24-Hour Turnaround</h3>
+        <p>Standard pickup and delivery within 24 hours.</p>
+    </div>
+
+    <div class="card">
+        <h3>Same-Day Rush</h3>
+        <p>$20 rush fee if pickup is before 2PM.</p>
+    </div>
+</section>
+
+<section class="services">
+    <h2>Service Areas</h2>
+    <p>Serving Green Valley, Aurora, Commerce City & Brighton, Colorado.</p>
+    <p><strong>Pickup Hours:</strong> 7AM – 7PM</p>
+</section>
+
+<section id="booking">
+    <h2>Schedule Pickup & Pay</h2>
+
+    <div class="card">
+
+        <label>Number of 13-Gallon Bags ($10 each)</label><br>
+        <input type="number" id="bags" min="1" value="1">
+
+        <br><br>
+
+        <label>
+            <input type="checkbox" id="rush">
+            Add Same-Day Rush ($20)
+        </label>
+
+        <h3>Total: $<span id="total">10</span></h3>
+
+        <button onclick="checkout()">Proceed to Secure Payment</button>
+
+    </div>
+</section>
+
+<section>
+    <h2>Why Choose Us?</h2>
+    <div class="card">
+        <p>✔ Reliable & On-Time Pickup</p>
+        <p>✔ Affordable Flat Pricing</p>
+        <p>✔ Fresh, Clean & Carefully Handled</p>
+        <p>✔ Locally Owned & Operated</p>
+    </div>
+</section>
+
+<section class="contact">
+    <h2>Contact Us</h2>
+    <p><strong>Phone:</strong> <a href="tel:7209995328">720-999-5328</a></p>
+    <p><strong>Email:</strong> <a href="mailto:drivedenverllc@gmail.com">drivedenverllc@gmail.com</a></p>
+</section>
+
+<footer>
+    <p>© 2026 Laundry Be Gone. All rights reserved.</p>
+</footer>
+
+<script>
+const bagPrice = 10;
+const rushFee = 20;
+
+const bagsInput = document.getElementById('bags');
+const rushCheckbox = document.getElementById('rush');
+const totalDisplay = document.getElementById('total');
+
+function calculateTotal() {
+    let total = bagsInput.value * bagPrice;
+
+    if (rushCheckbox.checked) {
+        total += rushFee;
+    }
+
+    totalDisplay.innerText = total;
+}
+
+bagsInput.addEventListener('input', calculateTotal);
+rushCheckbox.addEventListener('change', calculateTotal);
+
+function checkout() {
+    let total = totalDisplay.innerText;
+
+    // 🔥 REPLACE WITH YOUR STRIPE LINK
+    let stripeLink = "https://buy.stripe.com/YOUR-LINK-HERE";
+
+    window.location.href = stripeLink + "?amount=" + total;
+}
+</script>
+
+</body>
+</html>
